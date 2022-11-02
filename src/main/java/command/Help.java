@@ -30,26 +30,26 @@ public class Help implements Command{
         commandList.add(String.format("Enter >%s< to see all commands", HELP));
         commandList.add(String.format("Enter >%s< to exit program", Exit.COMMAND_NAME));
 
-        commandList.add(String.format("Enter >%s< to exit program", FindPetById.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", FindPetByStatus.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", AddNewPet.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", UpdatePetById.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", UploadPetImage.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", DeletePet.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", UpdatePetByFormData.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to find pet by id", FindPetById.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to find pet by status", FindPetByStatus.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to add new pet", AddNewPet.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to update pet by id", UpdatePetById.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to upload image", UploadPetImage.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to delete pet", DeletePet.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to update pet by form data", UpdatePetByFormData.COMMAND_NAME));
 
-        commandList.add(String.format("Enter >%s< to exit program", DeleteOrderById.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", FindOrderById.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", GetPetInventories.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", PlaceOrder.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to delete order by id", DeleteOrderById.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to find order by id", FindOrderById.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to get pet inventories", GetPetInventories.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to place order", PlaceOrder.COMMAND_NAME));
 
-        commandList.add(String.format("Enter >%s< to exit program", CreateUser.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", CreateUsersWithArray.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", CreateUsersWithList.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", DeleteUser.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", UpdateUser.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", UserLogin.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", UserLogout.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to create user", CreateUser.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to create user with array", CreateUsersWithArray.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to create user with list", CreateUsersWithList.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to delete user", DeleteUser.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to update user", UpdateUser.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to login", UserLogin.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to logout", UserLogout.COMMAND_NAME));
 
         view.write("Commands list:");
         for(String command: commandList){

@@ -27,21 +27,28 @@ public class FindPetByStatus implements Command {
         String status;
         Pet[] pets;
         while (true) {
-            try {
-                view.write("Enter pet status: \"available\" or \"pending\" or \"sold\": ");
-                status = view.read();
-                pets = service.findPetByStatus(status);
+            view.write("Enter pet status: \"available\" or \"pending\" or \"sold\": ");
+            status = view.read();
+            if (status.equals("available") || status.equals("pending") || status.equals("sold")){
+                try {
+                    pets = service.findPetByStatus(status);
+                    if (pets.length == 0) {
+                        view.write("No pets found, try another status");
+                    } else {
+                        view.write(String.format("Pets by status \"%s\" : ", status));
+                        for(Pet pet : pets){
+                            view.write(pet.toString());
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 break;
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                view.write("Invalid status! Status must be \"available\", \"pending\", \"sold\"");
             }
         }
-        if (pets.length == 0) {
-            view.write("No pets found, try another status");
-        } else {
-            for(Pet pet : pets){
-                view.write(pet.toString());
-            }
-        }
+
     }
 }
