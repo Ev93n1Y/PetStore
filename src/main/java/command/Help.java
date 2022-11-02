@@ -1,6 +1,7 @@
 package command;
 
 import command.order.DeleteOrderById;
+import command.order.FindOrderById;
 import command.order.GetPetInventories;
 import command.order.PlaceOrder;
 import command.pet.*;
@@ -38,7 +39,7 @@ public class Help implements Command{
         commandList.add(String.format("Enter >%s< to exit program", UpdatePetByFormData.COMMAND_NAME));
 
         commandList.add(String.format("Enter >%s< to exit program", DeleteOrderById.COMMAND_NAME));
-        commandList.add(String.format("Enter >%s< to exit program", DeleteOrderById.COMMAND_NAME));
+        commandList.add(String.format("Enter >%s< to exit program", FindOrderById.COMMAND_NAME));
         commandList.add(String.format("Enter >%s< to exit program", GetPetInventories.COMMAND_NAME));
         commandList.add(String.format("Enter >%s< to exit program", PlaceOrder.COMMAND_NAME));
 

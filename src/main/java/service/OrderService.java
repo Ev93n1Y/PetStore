@@ -3,9 +3,9 @@ package service;
 import entity.ApiResponse;
 import entity.Order;
 import repository.OrderRepository;
-import repository.PetRepository;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class OrderService {
     private final OrderRepository repository;
@@ -26,7 +26,7 @@ public class OrderService {
         return repository.deleteOrderById(id);
     }
 
-    public void getPetInventories() throws IOException {
-        repository.getPetInventories();
+    public Map<String, Integer> getPetInventories() throws IOException {
+        return repository.getPetInventories();
     }
 }

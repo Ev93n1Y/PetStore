@@ -22,31 +22,30 @@ public class UserRepository extends EntityHandling {
 
     //POST/user/createWithArray       Creates list of users with given input array
     public ApiResponse createUsersWithList(List<User> usersList) throws IOException {
-        HttpPost request = new HttpPost(uri + "createWithArray");
-        setContentTypeJson(request);
-        HttpEntity entity = getHttpEntity(httpClient, request);
-        return objectFromJsonOrNull(entity, ApiResponse.class);
-        //return gson.fromJson(EntityUtils.toString(entity), ApiResponse.class);
-    }
-
-    //POST/user/createWithList        Creates list of users with given input array
-    public ApiResponse createUsersWithArray(User[] user) throws IOException {
-        StringEntity requestEntity = new StringEntity(gson.toJson(user));
+        StringEntity requestEntity = new StringEntity(gson.toJson(usersList));
         HttpPost request = new HttpPost(uri + "createWithList");
         request.setEntity(requestEntity);
         setContentTypeJson(request);
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, ApiResponse.class);
-        //return gson.fromJson(EntityUtils.toString(entity), ApiResponse.class);
+    }
+
+    //POST/user/createWithList        Creates list of users with given input array
+    public ApiResponse createUsersWithArray(User[] user) throws IOException {
+        StringEntity requestEntity = new StringEntity(gson.toJson(user));
+        HttpPost request = new HttpPost(uri + "createWithArray");
+        request.setEntity(requestEntity);
+        setContentTypeJson(request);
+        HttpEntity entity = getHttpEntity(httpClient, request);
+        return objectFromJsonOrNull(entity, ApiResponse.class);
     }
 
     //GET/user/{username}     Get user by user name
     public User getUser(String userName) throws IOException {
-        HttpGet request = new HttpGet(uri + "user/" + userName);
+        HttpGet request = new HttpGet(uri + userName);
         setContentTypeJson(request);
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, User.class);
-        //return gson.fromJson(EntityUtils.toString(entity), User.class);
     }
 
     //PUT/user/{username}     Updated user
@@ -58,35 +57,28 @@ public class UserRepository extends EntityHandling {
         setContentTypeJson(request);
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, ApiResponse.class);
-        //return gson.fromJson(EntityUtils.toString(entity), ApiResponse.class);
     }
 
     //DELETE/user/{username}  Delete user
     //This can only be done by the logged-in user.
     public ApiResponse deleteUser(String userName) throws IOException {
-        HttpDelete request = new HttpDelete(uri + "user/" + userName);
-        setContentTypeJson(request);
+        HttpDelete request = new HttpDelete(uri + userName);
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, ApiResponse.class);
-        //return gson.fromJson(EntityUtils.toString(entity), ApiResponse.class);
     }
 
     //GET/user/login  Logs user into the system
     public ApiResponse userLogin(String userName, String password) throws IOException {
-        HttpGet request = new HttpGet(uri + "user/login?username=" + userName + "&password=" + password);
-        setContentTypeJson(request);
+        HttpGet request = new HttpGet(uri + "login?username=" + userName + "&password=" + password);
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, ApiResponse.class);
-        //return gson.fromJson(EntityUtils.toString(entity), ApiResponse.class);
     }
 
     //GET/user/logout Logs out current logged-in user session
     public ApiResponse userLogout() throws IOException {
-        HttpGet request = new HttpGet(uri + "user/logout");
-        setContentTypeJson(request);
+        HttpGet request = new HttpGet(uri + "logout");
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, ApiResponse.class);
-        //return gson.fromJson(EntityUtils.toString(entity), ApiResponse.class);
     }
 
     //POST/user   Create user
@@ -98,7 +90,5 @@ public class UserRepository extends EntityHandling {
         setContentTypeJson(request);
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, ApiResponse.class);
-        //return gson.fromJson(EntityUtils.toString(entity), ApiResponse.class);
     }
-
 }

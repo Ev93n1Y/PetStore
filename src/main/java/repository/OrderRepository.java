@@ -10,6 +10,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class OrderRepository extends EntityHandling {
     private final String uri = "https://petstore.swagger.io/v2/store/";
@@ -23,6 +24,7 @@ public class OrderRepository extends EntityHandling {
         StringEntity requestEntity = new StringEntity(gson.toJson(order));
         HttpPost request = new HttpPost(uri + "order/");
         request.setEntity(requestEntity);
+        setContentTypeJson(request);
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, Order.class);
     }
@@ -47,10 +49,9 @@ public class OrderRepository extends EntityHandling {
 
     //GET/store/inventory     Returns pet inventories by status
     //Returns a map of status codes to quantities
-    public void getPetInventories() throws IOException {
+    public Map<String, Integer> getPetInventories() throws IOException {
         HttpGet request = new HttpGet(uri + "inventory/");
         HttpEntity entity = getHttpEntity(httpClient, request);
-        //return objectFromJsonOrNull(entity, Order.class);
-        objectFromJsonOrNull(entity, Order.class);
+        return mapFromJsonOrNull(entity);
     }
 }

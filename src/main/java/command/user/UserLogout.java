@@ -1,15 +1,17 @@
 package command.user;
 
 import command.Command;
-import service.PetService;
+import service.UserService;
 import view.View;
+
+import java.io.IOException;
 
 public class UserLogout implements Command {
     public static final String COMMAND_NAME = "user logout";
     private final View view;
-    private final PetService service;
+    private final UserService service;
 
-    public UserLogout(View view, PetService service) {
+    public UserLogout(View view, UserService service) {
         this.view = view;
         this.service = service;
     }
@@ -21,6 +23,10 @@ public class UserLogout implements Command {
 
     @Override
     public void execute() {
-
+        try {
+            view.write(service.userLogout().toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

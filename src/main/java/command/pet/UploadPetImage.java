@@ -2,13 +2,11 @@ package command.pet;
 
 import command.Command;
 import entity.ApiResponse;
-import entity.Pet;
 import service.PetService;
 import view.View;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class UploadPetImage implements Command {
     public static final String COMMAND_NAME = "upload pet image";
@@ -38,7 +36,7 @@ public class UploadPetImage implements Command {
                     view.write("Wrong input,use digits");
                 }
             }
-            view.write("Enter photo url in resource path");
+            view.write("Enter photo name in resource path");
             view.write("For example: \"the-cat.jpg\"");
             String path = String.format("./src/main/resources/%s", view.read());
             try {
