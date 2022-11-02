@@ -30,9 +30,15 @@ public class FindOrderById implements Command {
             try {
                 view.write("Enter order id: ");
                 id = Integer.parseInt(view.read());
-                break;
+                if(service.findOrderById(id) == null){
+                    view.write("No order found by this id. Try another id");
+                } else {
+                    break;
+                }
             } catch (IllegalArgumentException e){
                 view.write("Wrong input,use digits");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         try {

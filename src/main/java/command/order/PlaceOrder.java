@@ -63,7 +63,7 @@ public class PlaceOrder implements Command {
             if (complete.equalsIgnoreCase("Y")) {
                 order.setComplete(true);
                 break;
-            } else if (complete.equals("N")) {
+            } else if (complete.equalsIgnoreCase("N")) {
                 order.setComplete(false);
                 break;
             } else {
