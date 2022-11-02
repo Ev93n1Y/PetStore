@@ -24,16 +24,32 @@ public class CreateUsersWithArray implements Command {
 
     @Override
     public void execute() {
-        User[] users = new User[]{new User(),new User(),new User()};
-        for (User user: users) {
-            user.setId(0L);
-            user.setUsername("string");
-            user.setFirstName("string");
-            user.setLastName("string");
-            user.setEmail("string");
-            user.setPassword("string");
-            user.setPhone("string");
-            user.setUserStatus(0);
+        User[] users;
+        while (true) {
+            try {
+                view.write("Enter number of users you want to add: ");
+                int userCount = Integer.parseInt(view.read());
+                users = new User[userCount];
+                break;
+            } catch (IllegalArgumentException e) {
+                view.write("Use digits");
+            }
+        }
+        for (int i = 0; i < users.length; i++) {
+            view.write(String.format("Enter user number %d: ", i + 1));
+            users[i] = new User();
+            view.write("Enter username: ");
+            users[i].setUsername(view.read());
+            view.write("Enter firstname: ");
+            users[i].setFirstName(view.read());
+            view.write("Enter lastname: ");
+            users[i].setLastName(view.read());
+            view.write("Enter email: ");
+            users[i].setEmail(view.read());
+            view.write("Enter password: ");
+            users[i].setPassword(view.read());
+            view.write("Enter phone: ");
+            users[i].setPhone(view.read());
         }
         try {
             view.write(service.createUsersWithArray(users).toString());

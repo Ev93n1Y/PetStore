@@ -1,7 +1,6 @@
 package command.user;
 
 import command.Command;
-import entity.ApiResponse;
 import entity.User;
 import service.UserService;
 import view.View;
@@ -28,16 +27,34 @@ public class CreateUsersWithList implements Command {
     @Override
     public void execute() {
         List<User> userList = new ArrayList<>();
-        ApiResponse response;
-        userList.add(new User(0L, "string1", "string", "string",
-                "string", "string", "string", 0)) ;
-        userList.add(new User(0L, "string2", "string", "string",
-                "string", "string3", "string", 0)) ;
-        userList.add(new User(0L, "string", "string", "string",
-                "string", "string", "string", 0)) ;
+        int userCount;
+        while (true) {
+            try {
+                view.write("Enter number of users you want to add: ");
+                userCount = Integer.parseInt(view.read());
+                break;
+            } catch (IllegalArgumentException e) {
+                view.write("Use digits");
+            }
+        }
+        for (int i = 0; i < userCount; i++) {
+            userList.add(new User());
+            view.write(String.format("Enter user number %d: ", i + 1));
+            view.write("Enter username: ");
+            userList.get(i).setUsername(view.read());
+            view.write("Enter firstname: ");
+            userList.get(i).setFirstName(view.read());
+            view.write("Enter lastname: ");
+            userList.get(i).setLastName(view.read());
+            view.write("Enter email: ");
+            userList.get(i).setEmail(view.read());
+            view.write("Enter password: ");
+            userList.get(i).setPassword(view.read());
+            view.write("Enter phone: ");
+            userList.get(i).setPhone(view.read());
+        }
         try {
-            response = service.createUsersWithList(userList);
-            view.write(response.toString());
+            view.write(service.createUsersWithList(userList).toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
