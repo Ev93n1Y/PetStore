@@ -30,28 +30,13 @@ public class AddNewPet implements Command {
     public void execute() {
         Pet pet = new Pet();
         Category category = new Category();
-        Tags tag = new Tags();
+        //Tags tag = new Tags();
         List<Tags> tags = new ArrayList<>();
-        while(true) {
-            try {
-                view.write("Enter pet id: ");
-                pet.setId(Long.parseLong(view.read()));
-                break;
-            } catch (IllegalArgumentException e){
-                view.write("Wrong input,use digits");
-            }
-        }
+        int tagId = 0;
+        pet.setId(0L);
         view.write("Enter pet name: ");
         pet.setName(view.read());
-        while(true) {
-            try {
-                view.write("Enter category id: ");
-                category.setId(Long.parseLong(view.read()));
-                break;
-            } catch (IllegalArgumentException e){
-                view.write("No such id, try again");
-            }
-        }
+        category.setId(0L);
         view.write("Enter category name: ");
         category.setName(view.read());
         pet.setCategory(category);
@@ -67,33 +52,19 @@ public class AddNewPet implements Command {
                 break;
             }
         }
-        while(true) {
-            try {
-                view.write("Enter tag id: ");
-                tag.setId(Long.parseLong(view.read()));
-                break;
-            } catch (NumberFormatException e){
-                view.write("Invalid value. Use digits");
-            }
-        }
+        tags.add(new Tags());
+        tags.get(tagId).setId(0L);
         view.write("Enter tag name: ");
-        tag.setName(view.read());
-        tags.add(tag);
+        tags.get(tagId).setName(view.read());
+        //tags.add(tag);
         while (true) {
             view.write("Do you want to add more tags? Enter Y/N: ");
             if (view.read().equalsIgnoreCase("Y")) {
-                while (true){
-                    try{
-                        view.write("Enter tag id: ");
-                        tag.setId(Long.parseLong(view.read()));
-                        break;
-                    } catch (NumberFormatException e){
-                        view.write("Invalid value. Use digits");
-                    }
-                }
+                tags.add(new Tags());
+                tags.get(++tagId).setId((long) tagId);
                 view.write("Enter tag name: ");
-                tag.setName(view.read());
-                tags.add(tag);
+                tags.get(tagId).setName(view.read());
+                //tags.add(tag);
             } else {
                 break;
             }
