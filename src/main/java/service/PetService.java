@@ -40,7 +40,7 @@ public class PetService {
         return repository.uploadImageByPetId(id, image);
     }
 
-    public ApiResponse deletePet(Integer id) throws IOException {
+    public ApiResponse deletePet(Long id) throws IOException {
         return repository.deletePet(id);
     }
 

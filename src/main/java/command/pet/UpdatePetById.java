@@ -30,7 +30,6 @@ public class UpdatePetById implements Command {
     public void execute() {
         Pet pet = new Pet();
         Category category = new Category();
-        Tags tag;
         List<Tags> tags = new ArrayList<>();
         int tagId = 0;
         long petId;

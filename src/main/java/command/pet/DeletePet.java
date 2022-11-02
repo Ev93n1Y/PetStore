@@ -24,12 +24,16 @@ public class DeletePet implements Command {
     @Override
     public void execute() {
         while(true) {
-            int id;
+            long id;
             try {
                 view.write("Enter pet id that you want to delete: ");
-                id = Integer.parseInt(view.read());
-                view.write(service.deletePet(id).toString());
-                break;
+                id = Long.parseLong(view.read());
+                if(service.findPetById(id) == null){
+                    view.write("No pets found by this id. Try another id.");
+                } else {
+                    view.write(service.deletePet(id).toString());
+                    break;
+                }
             } catch (IllegalArgumentException e){
                 view.write("Wrong input,use digits");
             } catch (IOException e) {

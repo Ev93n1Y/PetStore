@@ -72,7 +72,7 @@ public class PetRepository extends EntityHandling {
 
     //POST/pet/{petId}            Updates a pet in the store with form data
     public ApiResponse updatePetWithFormData(Long id, String newName, String newStatus) throws IOException {
-        StringEntity requestEntity = new StringEntity(gson.toJson("name=" + newName + "&status=" + newStatus));
+        StringEntity requestEntity = new StringEntity("name=" + newName + "&status=" + newStatus);
         HttpPost request = new HttpPost(uri + id);
         request.setEntity(requestEntity);
         setContentTypeForm(request);
@@ -103,7 +103,7 @@ public class PetRepository extends EntityHandling {
     }
 
     //DELETE/pet/{petId}            Deletes a pet
-    public ApiResponse deletePet(Integer id) throws IOException {
+    public ApiResponse deletePet(Long id) throws IOException {
         HttpDelete request = new HttpDelete(uri + id);
         HttpEntity entity = getHttpEntity(httpClient, request);
         return objectFromJsonOrNull(entity, ApiResponse.class);

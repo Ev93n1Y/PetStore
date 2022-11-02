@@ -31,9 +31,15 @@ public class UpdatePetByFormData implements Command {
             try {
                 view.write("Enter pet id that you want to update: ");
                 id = Long.parseLong(view.read());
-                break;
+                if(service.findPetById(id) == null){
+                    view.write("No pets found by this id. Try another id.");
+                } else {
+                    break;
+                }
             } catch (IllegalArgumentException e){
                 view.write("Wrong input,use digits");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         view.write("Enter pet name: ");
