@@ -30,28 +30,29 @@ public class UpdatePetById implements Command {
     public void execute() {
         Pet pet = new Pet();
         Category category = new Category();
-        Tags tag = new Tags();
+        Tags tag;
         List<Tags> tags = new ArrayList<>();
+        int tagId = 0;
+        long petId;
         while(true) {
             try {
                 view.write("Enter pet id that you want to update: ");
-                pet.setId(Long.parseLong(view.read()));
-                break;
+                petId = Long.parseLong(view.read());
+                if(service.findPetById(petId) == null) {
+                    view.write("No pets found by this id. Try another id.");
+                } else {
+                    break;
+                }
             } catch (IllegalArgumentException e){
                 view.write("Wrong input,use digits");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+        pet.setId(petId);
         view.write("Enter pet name: ");
         pet.setName(view.read());
-        while(true) {
-            try {
-                view.write("Enter category id: ");
-                category.setId(Long.parseLong(view.read()));
-                break;
-            } catch (IllegalArgumentException e){
-                view.write("No such id, try again");
-            }
-        }
+        category.setId(0L);
         view.write("Enter category name: ");
         category.setName(view.read());
         pet.setCategory(category);
@@ -67,33 +68,17 @@ public class UpdatePetById implements Command {
                 break;
             }
         }
-        while(true) {
-            try {
-                view.write("Enter tag id: ");
-                tag.setId(Long.parseLong(view.read()));
-                break;
-            } catch (NumberFormatException e){
-                view.write("Invalid value. Use digits");
-            }
-        }
+        tags.add(new Tags());
+        tags.get(tagId).setId(0L);
         view.write("Enter tag name: ");
-        tag.setName(view.read());
-        tags.add(tag);
+        tags.get(tagId).setName(view.read());
         while (true) {
             view.write("Do you want to add more tags? Enter Y/N: ");
             if (view.read().equalsIgnoreCase("Y")) {
-                while (true){
-                    try{
-                        view.write("Enter tag id: ");
-                        tag.setId(Long.parseLong(view.read()));
-                        break;
-                    } catch (NumberFormatException e){
-                        view.write("Invalid value. Use digits");
-                    }
-                }
+                tags.add(new Tags());
+                tags.get(++tagId).setId((long) tagId);
                 view.write("Enter tag name: ");
-                tag.setName(view.read());
-                tags.add(tag);
+                tags.get(tagId).setName(view.read());
             } else {
                 break;
             }
@@ -110,8 +95,9 @@ public class UpdatePetById implements Command {
             }
         }
         try {
+            pet = service.updatePetById(pet);
             view.write(String.format("Pet id = %d updated: ", pet.getId()));
-            view.write(service.updatePetById(pet).toString());
+            view.write(pet.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

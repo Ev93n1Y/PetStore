@@ -83,7 +83,7 @@ public class PetRepository extends EntityHandling {
     //PUT/pet                    Update an existing pet
     public Pet updatePetById(Pet pet) throws IOException {
         StringEntity requestEntity = new StringEntity(gson.toJson(pet));
-        HttpPost request = new HttpPost(uri + pet.getId());
+        HttpPost request = new HttpPost(uri);
         request.setEntity(requestEntity);
         setContentTypeJson(request);
         HttpEntity entity = getHttpEntity(httpClient, request);
